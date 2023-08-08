@@ -1,5 +1,11 @@
 # NgWorkspace
 
+create project without app
+ng new ng-workspace --create-application="false"
+
+create portal application
+ng g application portal --standalone
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.4.
 
 ## Development server
