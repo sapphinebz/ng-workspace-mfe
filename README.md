@@ -6,6 +6,15 @@ ng new ng-workspace --create-application="false"
 create portal application
 ng g application portal --standalone
 
+create mfe1 application
+ng g application mfe1 --standalone
+
+add custom builder to portal project
+ng add @angular-architects/module-federation --project portal --port 4200 --type host
+
+add custom builder to mfe1 project
+ng add @angular-architects/module-federation --project mfe1 --port 4201 --type remote
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.4.
 
 ## Development server
