@@ -4,5 +4,11 @@
     <a [routerLink]="remote.routePath">{{ remote.displayName }}</a>
   </li>
 </ul>
+<div>
+  <app-plugin-proxy
+    *ngFor="let options of pluginOptions()"
+    [options]="options"
+  ></app-plugin-proxy>
+</div>
 
 <router-outlet></router-outlet>

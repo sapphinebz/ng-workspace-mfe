@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewContainerRef, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewContainerRef,
+  inject,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { from } from 'rxjs';
@@ -11,19 +17,24 @@ import {
   CustomRemoteConfig,
 } from '../shared/models/custom-remote-config';
 import { buildRoutes } from './utils/routes';
-
+import { LookupService } from '../shared/services/lookup.service';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { PluginProxyComponent } from '../shared/components/plugin-proxy/plugin-proxy.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  imports: [CommonModule, RouterOutlet, RouterLink, PluginProxyComponent],
 })
 export class AppComponent implements OnInit {
   title = 'portal';
   vc = inject(ViewContainerRef);
   router = inject(Router);
   remotes: CustomRemoteConfig[] = [];
+  lookupService = inject(LookupService);
+
+  pluginOptions = toSignal(this.lookupService.lookUp(), { initialValue: [] });
 
   ngOnInit(): void {
     const manifest = getManifest<CustomManifest>();
